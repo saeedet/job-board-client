@@ -1,8 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./resource/images/logo.svg";
+import "./styles/App.css";
+import { useQuery, gql } from "@apollo/client";
 
 function App() {
+  const { data, loading } = useQuery(gql`
+    {
+      getJobs {
+        id
+        title
+      }
+    }
+  `);
+
+  console.log(data);
+  if (loading) return <div>Loading</div>;
+  if (data) return <div>{data.getJobs[0].title}</div>;
   return (
     <div className="App">
       <header className="App-header">
@@ -10,14 +23,6 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
