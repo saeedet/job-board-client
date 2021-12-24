@@ -2,16 +2,10 @@ import React from "react";
 import logo from "./resource/images/logo.svg";
 import "./styles/App.css";
 import { useQuery, gql } from "@apollo/client";
+import { useGetJobsQuery } from "./generated/graphql";
 
 function App() {
-  const { data, loading } = useQuery(gql`
-    {
-      getJobs {
-        id
-        title
-      }
-    }
-  `);
+  const { data, loading } = useGetJobsQuery();
 
   console.log(data);
   if (loading) return <div>Loading</div>;
