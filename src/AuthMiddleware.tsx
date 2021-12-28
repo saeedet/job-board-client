@@ -7,10 +7,11 @@ const AuthMiddleware: React.FC = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/refresh_token", {
+      .post("http://localhost:4000/refresh_token", {
         withCredentials: true,
       })
       .then((data) => {
+        console.log(data);
         setAccessToken(data.data.accessToken);
         setLoading(false);
       });

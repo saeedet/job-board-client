@@ -36,7 +36,7 @@ const tokenRefreshLink = new TokenRefreshLink({
     }
   },
   fetchAccessToken: () => {
-    return axios.get("http://localhost:4000/refresh_token", {
+    return axios.post("http://localhost:4000/refresh_token", {
       withCredentials: true,
     });
   },

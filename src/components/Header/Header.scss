@@ -1,0 +1,45 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 76px;
+  background-color: white;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+}
+
+.header__logo {
+  width: 149px;
+  margin-left: 30px;
+  cursor: pointer;
+}
+
+.header__navbar {
+  ul,
+  li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul {
+    display: flex;
+    margin-right: 40px;
+  }
+  a {
+    text-decoration: none;
+    font-family: "Proxima Nova", sans-serif;
+    font-size: 14px;
+    color: #27343bd7;
+    line-height: 56px;
+    &:hover {
+      color: black;
+    }
+  }
+  li + li {
+    margin-left: 20px;
+  }
+}
