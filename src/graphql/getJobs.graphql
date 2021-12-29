@@ -1,4 +1,4 @@
-query getJobs {
+query GetJobs {
   getJobs {
     title
   }

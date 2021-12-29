@@ -15,6 +15,8 @@ import { getAccessToken, setAccessToken } from "./utils/accessToken";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import axios from "axios";
 import { onError } from "@apollo/client/link/error";
+import { StateProvider } from "./context/Context";
+import { initialState, reducer } from "./context/reducer";
 
 const tokenRefreshLink = new TokenRefreshLink({
   accessTokenField: "accessToken",
@@ -91,9 +93,11 @@ const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <BrowserRouter>
-      <AuthMiddleware />
-    </BrowserRouter>
+    <StateProvider initialState={initialState} reducer={reducer}>
+      <BrowserRouter>
+        <AuthMiddleware />
+      </BrowserRouter>
+    </StateProvider>
   </ApolloProvider>,
   document.getElementById("root")
 );

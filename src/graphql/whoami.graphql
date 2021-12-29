@@ -1,0 +1,6 @@
+query Whoami($id: String!) {
+  whoami(id: $id) {
+    firstName
+    lastName
+  }
+}

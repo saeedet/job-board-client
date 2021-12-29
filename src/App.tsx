@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Index";
 import Home from "./pages/Home/Index";
 import Header from "./components/Header/Header";
+import Signup from "./pages/Signup/Index";
 
 const App: React.FC = () => {
   const { data, loading } = useGetJobsQuery();
@@ -24,6 +25,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </div>
   );

@@ -152,6 +152,7 @@ export type Query = {
   getJobs: Array<Job>;
   getUser?: Maybe<User>;
   getUsers: Array<User>;
+  whoami: User;
 };
 
 
@@ -167,6 +168,11 @@ export type QueryGetJobArgs = {
 
 export type QueryGetUserArgs = {
   email: Scalars['String'];
+};
+
+
+export type QueryWhoamiArgs = {
+  id: Scalars['String'];
 };
 
 export type UpdateApplicantInput = {
@@ -216,9 +222,16 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', firstName: string, lastName: string } } };
 
+export type WhoamiQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type WhoamiQuery = { __typename?: 'Query', whoami: { __typename?: 'User', firstName: string, lastName: string } };
+
 
 export const GetJobsDocument = gql`
-    query getJobs {
+    query GetJobs {
   getJobs {
     title
   }
@@ -289,3 +302,39 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const WhoamiDocument = gql`
+    query Whoami($id: String!) {
+  whoami(id: $id) {
+    firstName
+    lastName
+  }
+}
+    `;
+
+/**
+ * __useWhoamiQuery__
+ *
+ * To run a query within a React component, call `useWhoamiQuery` and pass it any options that fit your needs.
+ * When your component renders, `useWhoamiQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useWhoamiQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useWhoamiQuery(baseOptions: Apollo.QueryHookOptions<WhoamiQuery, WhoamiQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<WhoamiQuery, WhoamiQueryVariables>(WhoamiDocument, options);
+      }
+export function useWhoamiLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WhoamiQuery, WhoamiQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<WhoamiQuery, WhoamiQueryVariables>(WhoamiDocument, options);
+        }
+export type WhoamiQueryHookResult = ReturnType<typeof useWhoamiQuery>;
+export type WhoamiLazyQueryHookResult = ReturnType<typeof useWhoamiLazyQuery>;
+export type WhoamiQueryResult = Apollo.QueryResult<WhoamiQuery, WhoamiQueryVariables>;

@@ -2,9 +2,14 @@ import React from "react";
 import "./Header.scss";
 import sideKicker from "./../../resource/images/sidekicker-logo.svg";
 import { Link, useNavigate } from "react-router-dom";
+import { useContextProvider } from "../../context/Context";
+import { useWhoamiQuery } from "../../generated/graphql";
 
 const Header: React.FC = () => {
   const navigate = useNavigate();
+  const [{ id }, dispatch] = useContextProvider();
+  const { data, loading } = useWhoamiQuery({ variables: id });
+  console.log(data);
   return (
     <div className="header">
       <img
