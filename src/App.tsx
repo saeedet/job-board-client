@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "./resource/images/logo.svg";
 import "./styles/App.css";
-import { useGetJobsQuery } from "./generated/graphql";
+import { useGetJobsQuery, useWhoAmIQuery } from "./generated/graphql";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/Login/Index";
 import Home from "./pages/Home/Index";
@@ -9,7 +9,16 @@ import Header from "./components/Header/Header";
 import Signup from "./pages/Signup/Index";
 
 const App: React.FC = () => {
-  const { data, loading } = useGetJobsQuery();
+  // const { data, loading } = useGetJobsQuery();
+  // useEffect(()=> {
+  // dispatch({
+  //   type: "SET_USER",
+  //   payload: {
+  //     firstName: data?.whoAmI?.firstName,
+  //     lastName: data?.whoAmI?.lastName,
+  //   },
+  // });
+  // }, [])
 
   // if (loading) return <div>Loading</div>;
   // if (data) return <div>{data.getJobs[0].title}</div>;

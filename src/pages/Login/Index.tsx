@@ -1,11 +1,15 @@
 import React, { FormEvent, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useContextProvider } from "../../context/Context";
 import { useLoginMutation } from "../../generated/graphql";
 import "./Login.scss";
 
 const Login: React.FC = () => {
   const [login] = useLoginMutation();
+  const [{}, dispatch] = useContextProvider();
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   // Login handler function
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
@@ -19,7 +23,17 @@ const Login: React.FC = () => {
         password: passwordRef.current.value,
       },
     });
-    console.log(loginResponse);
+    if (loginResponse && loginResponse.data) {
+      dispatch({
+        type: "SET_USER",
+        payload: {
+          firstName: loginResponse.data.login.user.firstName,
+          lastName: loginResponse.data.login.user.lastName,
+          accessToken: loginResponse.data.login.accessToken,
+        },
+      });
+    }
+    navigate("/");
   };
   return (
     <div className="login">

@@ -83,6 +83,7 @@ export type Mutation = {
   deleteJob: Scalars['String'];
   deleteUser: Scalars['String'];
   login: LoginResponse;
+  logout: Scalars['Boolean'];
   updateApplicant: Applicant;
   updateJob: Job;
   updateUser: User;
@@ -152,7 +153,7 @@ export type Query = {
   getJobs: Array<Job>;
   getUser?: Maybe<User>;
   getUsers: Array<User>;
-  whoami: User;
+  whoAmI?: Maybe<User>;
 };
 
 
@@ -168,11 +169,6 @@ export type QueryGetJobArgs = {
 
 export type QueryGetUserArgs = {
   email: Scalars['String'];
-};
-
-
-export type QueryWhoamiArgs = {
-  id: Scalars['String'];
 };
 
 export type UpdateApplicantInput = {
@@ -222,12 +218,15 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'LoginResponse', accessToken: string, user: { __typename?: 'User', firstName: string, lastName: string } } };
 
-export type WhoamiQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
+export type LogoutMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type WhoamiQuery = { __typename?: 'Query', whoami: { __typename?: 'User', firstName: string, lastName: string } };
+export type LogoutMutation = { __typename?: 'Mutation', logout: boolean };
+
+export type WhoAmIQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type WhoAmIQuery = { __typename?: 'Query', whoAmI?: { __typename?: 'User', firstName: string, lastName: string, email: string } | null | undefined };
 
 
 export const GetJobsDocument = gql`
@@ -302,39 +301,69 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
-export const WhoamiDocument = gql`
-    query Whoami($id: String!) {
-  whoami(id: $id) {
+export const LogoutDocument = gql`
+    mutation Logout {
+  logout
+}
+    `;
+export type LogoutMutationFn = Apollo.MutationFunction<LogoutMutation, LogoutMutationVariables>;
+
+/**
+ * __useLogoutMutation__
+ *
+ * To run a mutation, you first call `useLogoutMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLogoutMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [logoutMutation, { data, loading, error }] = useLogoutMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLogoutMutation(baseOptions?: Apollo.MutationHookOptions<LogoutMutation, LogoutMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LogoutMutation, LogoutMutationVariables>(LogoutDocument, options);
+      }
+export type LogoutMutationHookResult = ReturnType<typeof useLogoutMutation>;
+export type LogoutMutationResult = Apollo.MutationResult<LogoutMutation>;
+export type LogoutMutationOptions = Apollo.BaseMutationOptions<LogoutMutation, LogoutMutationVariables>;
+export const WhoAmIDocument = gql`
+    query WhoAmI {
+  whoAmI {
     firstName
     lastName
+    email
   }
 }
     `;
 
 /**
- * __useWhoamiQuery__
+ * __useWhoAmIQuery__
  *
- * To run a query within a React component, call `useWhoamiQuery` and pass it any options that fit your needs.
- * When your component renders, `useWhoamiQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useWhoAmIQuery` and pass it any options that fit your needs.
+ * When your component renders, `useWhoAmIQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useWhoamiQuery({
+ * const { data, loading, error } = useWhoAmIQuery({
  *   variables: {
- *      id: // value for 'id'
  *   },
  * });
  */
-export function useWhoamiQuery(baseOptions: Apollo.QueryHookOptions<WhoamiQuery, WhoamiQueryVariables>) {
+export function useWhoAmIQuery(baseOptions?: Apollo.QueryHookOptions<WhoAmIQuery, WhoAmIQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<WhoamiQuery, WhoamiQueryVariables>(WhoamiDocument, options);
+        return Apollo.useQuery<WhoAmIQuery, WhoAmIQueryVariables>(WhoAmIDocument, options);
       }
-export function useWhoamiLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WhoamiQuery, WhoamiQueryVariables>) {
+export function useWhoAmILazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<WhoAmIQuery, WhoAmIQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<WhoamiQuery, WhoamiQueryVariables>(WhoamiDocument, options);
+          return Apollo.useLazyQuery<WhoAmIQuery, WhoAmIQueryVariables>(WhoAmIDocument, options);
         }
-export type WhoamiQueryHookResult = ReturnType<typeof useWhoamiQuery>;
-export type WhoamiLazyQueryHookResult = ReturnType<typeof useWhoamiLazyQuery>;
-export type WhoamiQueryResult = Apollo.QueryResult<WhoamiQuery, WhoamiQueryVariables>;
+export type WhoAmIQueryHookResult = ReturnType<typeof useWhoAmIQuery>;
+export type WhoAmILazyQueryHookResult = ReturnType<typeof useWhoAmILazyQuery>;
+export type WhoAmIQueryResult = Apollo.QueryResult<WhoAmIQuery, WhoAmIQueryVariables>;

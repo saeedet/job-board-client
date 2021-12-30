@@ -2,9 +2,9 @@ import { CtxAction } from "../types/contextAction";
 import { InitialState } from "../types/initialState";
 
 export const initialState: InitialState = {
-  id: "2",
   firstName: null,
   lastName: null,
+  accessToken: "",
 };
 
 export const reducer = (state: InitialState, action: CtxAction) => {
@@ -13,6 +13,11 @@ export const reducer = (state: InitialState, action: CtxAction) => {
       return {
         ...state,
         ...action.payload,
+      };
+    case "SET_ACCESSTOKEN":
+      return {
+        ...state,
+        accessToken: action.payload,
       };
 
     default:

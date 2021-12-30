@@ -1,6 +1,7 @@
-query Whoami($id: String!) {
-  whoami(id: $id) {
+query WhoAmI {
+  whoAmI {
     firstName
     lastName
+    email
   }
 }
