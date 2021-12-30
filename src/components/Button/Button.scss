@@ -1,0 +1,16 @@
+.btn {
+  width: 190px;
+  height: 56px;
+  color: white;
+  background-color: black;
+  padding: 0 20px;
+  font-weight: 500;
+  line-height: 53px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 300ms ease;
+  font-family: "Proxima Nova SemiBold", sans-serif;
+  &:hover {
+    opacity: 0.9;
+  }
+}

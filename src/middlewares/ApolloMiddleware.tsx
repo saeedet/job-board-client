@@ -12,7 +12,7 @@ import { TokenRefreshLink } from "apollo-link-token-refresh";
 import jwtDecode, { JwtPayload } from "jwt-decode";
 import axios from "axios";
 import { onError } from "@apollo/client/link/error";
-import { useContextProvider } from "./context/Context";
+import { useContextProvider } from "../context/Context";
 
 const ApolloMiddleware: React.FC = () => {
   const [{ accessToken }, dispatch] = useContextProvider();

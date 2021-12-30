@@ -1,7 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import App from "./App";
-import { useContextProvider } from "./context/Context";
+import App from "../App";
+import { useContextProvider } from "../context/Context";
+import logo from "../resource/images/logo.svg";
 
 const AuthMiddleware: React.FC = () => {
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,12 @@ const AuthMiddleware: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>Loading...</p>
+      </header>
+    );
   }
 
   return <App />;
