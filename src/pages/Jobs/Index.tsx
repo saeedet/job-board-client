@@ -1,26 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Jobs.scss";
-import { useNavigate } from "react-router-dom";
 import { useGetJobsQuery } from "../../generated/graphql";
 import Searchbar from "../../components/Searchbar/Searchbar";
+import SearchResult from "../../components/SearchResult/SearchResult";
+import SearchAll from "../../components/SearchAll/SearchAll";
 
 const Jobs: React.FC = () => {
-  const { data, loading } = useGetJobsQuery();
-
-  if (loading) {
-    return (
-      <div className="jobs__loading">
-        <p>Loading...</p>
-      </div>
-    );
-  }
+  const { data } = useGetJobsQuery();
+  const [searchAll, setSearchAll] = useState<boolean>(true);
 
   return (
     <div className="jobs">
       <Searchbar />
-      {data?.getJobs.map((job, index) => (
-        <div key={`index-${index}`}>{job.title}</div>
-      ))}
+      {searchAll ? (
+        <SearchAll onClick={setSearchAll} />
+      ) : (
+        <SearchResult jobs={data?.getJobs} />
+      )}
     </div>
   );
 };

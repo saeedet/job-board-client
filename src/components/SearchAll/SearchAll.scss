@@ -1,0 +1,31 @@
+@use "../../styles/colors";
+
+.searchAll {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 20px;
+
+  div {
+    color: colors.$link_blue;
+    width: 40%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: colors.$light_gray;
+    span {
+      margin-left: 10px;
+    }
+    &:hover {
+      color: colors.$link_blue_hover;
+    }
+  }
+
+  .search__icon {
+    font-size: 20px;
+    margin-top: 2px;
+  }
+}
