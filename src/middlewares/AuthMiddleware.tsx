@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import App from "../App";
 import { useContextProvider } from "../context/Context";
 import logo from "../resource/images/logo.svg";
+import "./../styles/App.scss";
 
 const AuthMiddleware: React.FC = () => {
   const [loading, setLoading] = useState(true);

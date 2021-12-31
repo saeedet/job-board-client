@@ -2,23 +2,18 @@ import React from "react";
 import "./Button.scss";
 
 interface Props {
-  size: "sm" | "md" | "lg";
+  size: "sm" | "md" | "lg" | "form";
   text: string;
-  onClick: () => void;
+  onClick?: () => void;
   classes?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
-const Button: React.FC<Props> = ({
-  size,
-  text,
-  onClick,
-  classes,
-  ...props
-}) => {
+const Button: React.FC<Props> = ({ size, text, classes, ...props }) => {
   const btnClasses = `btn  btn-${size} ${classes}`;
 
   return (
-    <button className={btnClasses} onClick={onClick} {...props}>
+    <button className={btnClasses} {...props}>
       <div>{text}</div>
     </button>
   );

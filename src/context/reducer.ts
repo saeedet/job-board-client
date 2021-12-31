@@ -5,6 +5,7 @@ export const initialState: InitialState = {
   firstName: null,
   lastName: null,
   accessToken: "",
+  error: null,
 };
 
 export const reducer = (state: InitialState, action: CtxAction) => {
@@ -18,6 +19,11 @@ export const reducer = (state: InitialState, action: CtxAction) => {
       return {
         ...state,
         accessToken: action.payload,
+      };
+    case "SET_ERROR":
+      return {
+        ...state,
+        error: action.payload,
       };
 
     default:

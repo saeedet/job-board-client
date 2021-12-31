@@ -54,11 +54,21 @@ const ApolloMiddleware: React.FC = () => {
 
   const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
-      graphQLErrors.forEach(({ message, locations, path }) =>
-        console.log(
+      graphQLErrors.forEach(({ message, locations, path }) => {
+        if (path && path[0] === "login") {
+          dispatch({
+            type: "SET_ERROR",
+            payload: {
+              path: path[0],
+              message,
+            },
+          });
+          return;
+        }
+        return console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
-        )
-      );
+        );
+      });
 
     if (networkError) console.log(`[Network error]: ${networkError}`);
   });

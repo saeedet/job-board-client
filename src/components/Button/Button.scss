@@ -12,7 +12,10 @@
   transition: all 300ms ease;
   font-family: "Proxima Nova SemiBold", sans-serif;
   &:hover {
-    opacity: 0.9;
+    opacity: 0.85;
+  }
+  &:active {
+    opacity: 1;
   }
 }
 
@@ -25,4 +28,9 @@
   width: 100px;
   height: 48px;
   padding-top: 2px;
+}
+
+.btn-form {
+  width: 100%;
+  height: 40px;
 }

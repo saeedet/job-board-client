@@ -1,28 +1,29 @@
-import React, { FormEvent, useRef } from "react";
+import React, { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LoginForm from "../../components/LoginForm/LoginForm";
 import { useContextProvider } from "../../context/Context";
 import { useLoginMutation } from "../../generated/graphql";
 import "./Login.scss";
 
 const Login: React.FC = () => {
   const [login] = useLoginMutation();
-  const [{}, dispatch] = useContextProvider();
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const [{ error }, dispatch] = useContextProvider();
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
   // Login handler function
   const submitHandler = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    if (!usernameRef.current || !passwordRef.current) return;
+    if (!email || !password) return;
 
     const loginResponse = await login({
       variables: {
-        email: usernameRef.current.value,
-        password: passwordRef.current.value,
+        email,
+        password,
       },
     });
+
     if (loginResponse && loginResponse.data) {
       dispatch({
         type: "SET_USER",
@@ -32,20 +33,23 @@ const Login: React.FC = () => {
           accessToken: loginResponse.data.login.accessToken,
         },
       });
+      dispatch({
+        type: "SET_ERROR",
+        payload: null,
+      });
+      navigate("/");
     }
-    navigate("/");
   };
   return (
     <div className="login">
-      <form onSubmit={submitHandler}>
-        <div>
-          <input type="text" placeholder="username" ref={usernameRef} />
-        </div>
-        <div>
-          <input type="password" placeholder="password" ref={passwordRef} />
-        </div>
-        <button type="submit">Login</button>
-      </form>
+      <LoginForm
+        onSubmit={submitHandler}
+        email={email}
+        password={password}
+        setEmail={setEmail}
+        setPassword={setPassword}
+        error={error && error.path === "login"}
+      />
     </div>
   );
 };

@@ -1,5 +1,9 @@
 query GetJobs {
   getJobs {
+    id
     title
+    description
+    location
+    date
   }
 }

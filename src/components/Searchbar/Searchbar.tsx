@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Button from "../Button/Button";
 import SearchInput from "../SearchInput/SearchInput";
 import "./Searchbar.scss";
@@ -7,11 +7,12 @@ const Searchbar: React.FC = () => {
   const [keyword, setKeyword] = useState<string>("");
   const [location, setLocation] = useState<string>("");
 
-  const searchHandler = () => {
+  const searchHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log("clicked");
   };
   return (
-    <div className="searchbar">
+    <form onSubmit={searchHandler} className="searchbar">
       <SearchInput
         label="What"
         type="text"
@@ -30,11 +31,11 @@ const Searchbar: React.FC = () => {
       />
       <Button
         text="SEARCH"
-        onClick={searchHandler}
         size="md"
         classes="searchbar__align"
+        type="submit"
       />
-    </div>
+    </form>
   );
 };
 

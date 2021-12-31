@@ -208,7 +208,7 @@ export type User = {
 export type GetJobsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetJobsQuery = { __typename?: 'Query', getJobs: Array<{ __typename?: 'Job', title: string }> };
+export type GetJobsQuery = { __typename?: 'Query', getJobs: Array<{ __typename?: 'Job', id: string, title: string, description: string, location: string, date: string }> };
 
 export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
@@ -232,7 +232,11 @@ export type WhoAmIQuery = { __typename?: 'Query', whoAmI?: { __typename?: 'User'
 export const GetJobsDocument = gql`
     query GetJobs {
   getJobs {
+    id
     title
+    description
+    location
+    date
   }
 }
     `;

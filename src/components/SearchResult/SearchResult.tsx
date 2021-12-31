@@ -13,7 +13,9 @@ const SearchResult: React.FC<Props> = ({ jobs }) => {
   return (
     <div className="searchResult">
       {jobs.map((job: any, index: number) => (
-        <div key={`index-${index}`}>{job.title}</div>
+        <div key={`index-${index}`}>
+          {job.title} {job.description}
+        </div>
       ))}
     </div>
   );

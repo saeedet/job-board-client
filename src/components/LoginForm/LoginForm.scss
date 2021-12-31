@@ -1,0 +1,12 @@
+@use "../../styles/colors";
+
+.loginForm {
+  width: 386px;
+  h1 {
+    font-size: 30px;
+    line-height: 32px;
+    margin-bottom: 40px;
+    color: colors.$form_title;
+    font-family: "ProximaNovaSemibold", sans-serif, Arial, sans-serif;
+  }
+}

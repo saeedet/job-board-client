@@ -1,5 +1,5 @@
 import React from "react";
-import "./SearchInput.scss";
+import "./FormInput.scss";
 
 interface Props {
   type: string;
@@ -10,17 +10,17 @@ interface Props {
   label: string;
 }
 
-const SearchInput: React.FC<Props> = ({
+const FormInput: React.FC<Props> = ({
   type,
   placeholder,
-  onChange,
   value,
-  classes,
   label,
+  classes,
+  onChange,
   ...props
 }) => {
   return (
-    <div className={`searchInput ${classes}`}>
+    <div className="formInput">
       <label>{label}</label>
       <input
         type={type}
@@ -33,4 +33,4 @@ const SearchInput: React.FC<Props> = ({
   );
 };
 
-export default SearchInput;
+export default FormInput;
