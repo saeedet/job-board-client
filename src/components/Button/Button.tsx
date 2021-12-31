@@ -5,14 +5,21 @@ interface Props {
   size: "sm" | "md" | "lg";
   text: string;
   onClick: () => void;
+  classes?: string;
 }
 
-const Button: React.FC<Props> = ({ size, text, onClick, ...props }) => {
-  const classes = `btn  btn__${size}`;
+const Button: React.FC<Props> = ({
+  size,
+  text,
+  onClick,
+  classes,
+  ...props
+}) => {
+  const btnClasses = `btn  btn-${size} ${classes}`;
 
   return (
-    <button className={classes} onClick={onClick} {...props}>
-      {text}
+    <button className={btnClasses} onClick={onClick} {...props}>
+      <div>{text}</div>
     </button>
   );
 };

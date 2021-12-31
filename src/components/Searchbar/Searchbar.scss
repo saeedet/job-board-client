@@ -1,0 +1,13 @@
+@use "./../../styles/colors";
+
+.searchbar {
+  width: 100%;
+  height: 150px;
+  background-color: colors.$light_green;
+  display: flex;
+  justify-content: center;
+}
+
+.searchbar__align {
+  margin: auto 10px;
+}

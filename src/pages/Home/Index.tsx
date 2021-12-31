@@ -7,8 +7,12 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className="home">
-      <h1>Home page</h1>
-      <Button text="JOBS" size="lg" onClick={() => navigate("/jobs")} />
+      <h1>Reinventing casual and temporary staffing</h1>
+      <p>
+        We’re using technology to dramatically improve the way labour hire works
+        for businesses and workers.
+      </p>
+      <Button text="JOB SEARCH" size="lg" onClick={() => navigate("/jobs")} />
     </div>
   );
 };

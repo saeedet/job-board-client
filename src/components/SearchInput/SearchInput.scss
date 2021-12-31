@@ -1,0 +1,21 @@
+.searchInput {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  border: 1px solid black;
+  input {
+    padding: 12px;
+    width: 270px;
+    height: 20px;
+    font-size: 16px;
+  }
+  ::placeholder {
+    font-size: 15px;
+  }
+  div {
+    position: absolute;
+    top: -25px;
+    font-size: 16px;
+    font-weight: 900;
+  }
+}

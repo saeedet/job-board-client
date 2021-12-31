@@ -1,6 +1,7 @@
 .btn {
-  width: 190px;
-  height: 56px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   color: white;
   background-color: black;
   padding: 0 20px;
@@ -13,4 +14,15 @@
   &:hover {
     opacity: 0.9;
   }
+}
+
+.btn-lg {
+  width: 190px;
+  height: 56px;
+}
+
+.btn-md {
+  width: 100px;
+  height: 48px;
+  padding-top: 2px;
 }
