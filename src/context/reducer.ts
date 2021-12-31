@@ -14,16 +14,6 @@ export const reducer = (state: InitialState, action: CtxAction) => {
         ...state,
         ...action.payload,
       };
-    case "SET_ACCESSTOKEN":
-      return {
-        ...state,
-        accessToken: action.payload,
-      };
-    case "SET_ERROR":
-      return {
-        ...state,
-        error: action.payload,
-      };
 
     default:
       return state;

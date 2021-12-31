@@ -41,8 +41,8 @@ const ApolloMiddleware: React.FC = () => {
     },
     handleFetch: (accessToken) => {
       dispatch({
-        type: "SET_ACCESSTOKEN",
-        payload: accessToken,
+        type: "SET_USER",
+        payload: { accessToken },
       });
     },
     handleError: (err) => {

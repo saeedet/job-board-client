@@ -15,12 +15,10 @@ const AuthMiddleware: React.FC = () => {
         withCredentials: true,
       })
       .then((data) => {
-        if (data.data.error) {
-          console.error(data.data.message);
-        } else {
+        if (data.data.accessToken) {
           dispatch({
-            type: "SET_ACCESSTOKEN",
-            payload: data.data.accessToken,
+            type: "SET_USER",
+            payload: { accessToken: data.data.accessToken },
           });
         }
 
