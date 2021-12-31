@@ -27,7 +27,7 @@ const AuthMiddleware: React.FC = () => {
         setLoading(false);
       })
       .catch((err) => console.error(err));
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return (
