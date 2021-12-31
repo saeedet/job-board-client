@@ -5,7 +5,6 @@ export const initialState: InitialState = {
   firstName: null,
   lastName: null,
   accessToken: "",
-  error: null,
 };
 
 export const reducer = (state: InitialState, action: CtxAction) => {

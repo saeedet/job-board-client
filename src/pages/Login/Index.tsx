@@ -6,10 +6,11 @@ import { useLoginMutation } from "../../generated/graphql";
 import "./Login.scss";
 
 const Login: React.FC = () => {
-  const [login] = useLoginMutation();
-  const [{ error }, dispatch] = useContextProvider();
+  const [login] = useLoginMutation({ errorPolicy: "all" });
+  const [{}, dispatch] = useContextProvider();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
 
   // Login handler function
@@ -23,8 +24,7 @@ const Login: React.FC = () => {
         password,
       },
     });
-
-    if (loginResponse && loginResponse.data) {
+    if (loginResponse.data) {
       dispatch({
         type: "SET_USER",
         payload: {
@@ -33,11 +33,10 @@ const Login: React.FC = () => {
           accessToken: loginResponse.data.login.accessToken,
         },
       });
-      dispatch({
-        type: "SET_ERROR",
-        payload: null,
-      });
+      setError(false);
       navigate("/");
+    } else {
+      setError(true);
     }
   };
   return (
@@ -48,7 +47,7 @@ const Login: React.FC = () => {
         password={password}
         setEmail={setEmail}
         setPassword={setPassword}
-        error={error && error.path === "login"}
+        error={error}
       />
     </div>
   );
