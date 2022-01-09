@@ -1,0 +1,51 @@
+@use "./../../styles/colors";
+
+.jobCard {
+  border: 1px solid gainsboro;
+  padding: 10px 20px;
+  flex-direction: column;
+
+  .jobCard__title {
+    display: flex;
+    justify-content: space-between;
+
+    p {
+      color: colors.$link_blue;
+    }
+    h1 {
+      margin-top: 10px;
+      margin-bottom: 30px;
+      color: colors.$link_blue;
+      font-size: 22px;
+      cursor: pointer;
+    }
+  }
+  .jobCard__location {
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 7px;
+  }
+  .jobCard__description {
+    margin: 25px 0;
+    color: colors.$secondary_text;
+  }
+  .jobCard__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & > div {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .liked_icon {
+        color: colors.$link_blue;
+      }
+
+      & > span {
+        margin-left: 5px;
+      }
+    }
+  }
+}
