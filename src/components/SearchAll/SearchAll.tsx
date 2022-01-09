@@ -3,12 +3,12 @@ import "./SearchAll.scss";
 import SearchIcon from "@mui/icons-material/Search";
 
 interface Props {
-  onClick: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick: () => void;
 }
 
-const SearchAll: React.FC<Props> = ({ onClick }) => {
+const SearchAll: React.FC<Props> = ({ ...props }) => {
   return (
-    <div className="searchAll" onClick={() => onClick(false)}>
+    <div className="searchAll" {...props}>
       <div>
         <SearchIcon className="search__icon" />{" "}
         <span>All Jobs in Australia</span>

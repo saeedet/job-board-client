@@ -1,5 +1,6 @@
 export interface Job {
-  id: number;
+  __typename?: "Job" | undefined;
+  id: string;
   title: string;
   description: string;
   location: string;

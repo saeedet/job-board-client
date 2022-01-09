@@ -1,22 +1,32 @@
 import React from "react";
 import "./SearchResult.scss";
+import { Job } from "./../../types/Job";
+import JobCard from "../JobCard/JobCard";
 
 interface Props {
-  jobs: any;
+  jobs: Job[] | undefined;
 }
 
 const SearchResult: React.FC<Props> = ({ jobs }) => {
   if (!jobs) {
     return <div>Loading...</div>;
   }
-
+  console.log(jobs);
   return (
     <div className="searchResult">
-      {jobs.map((job: any, index: number) => (
-        <div key={`index-${index}`}>
-          {job.title} {job.description}
-        </div>
-      ))}
+      <div>
+        {jobs.map(
+          ({ id, title, description, location, date }: Job, index: number) => (
+            <JobCard
+              id={id}
+              title={title}
+              description={description}
+              location={location}
+              date={date}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 };
